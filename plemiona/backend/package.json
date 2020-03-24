@@ -14,7 +14,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.0",
     "mongodb": "^3.2.6",
-    "mongoose": "^5.5.11",
+    "mongoose": "^5.7.5",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
