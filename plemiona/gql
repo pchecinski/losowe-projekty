@@ -1,0 +1,109 @@
+# mutation {
+# 	add (player: {
+#     id: 698906643,
+#     villages: [
+#       {
+#         id: 1,
+#         units: [1, 2, 3]
+#       },
+#       {
+#         id: 2,
+#         units: [2, 3, 4]
+#       }
+#     ]
+#     features: {
+#       premium: true,
+#       farm_assistant: true
+#     },
+#     stats: {
+#       graph_res_looted_breakdown: "",
+#       graph_enemy_units: ""
+#     }
+#   }) 
+# }
+
+query {
+  player(id: 6989206643){
+    id, name, villages {id}, features{ premium, farm_assistant }, tribe, stats{ graph_units_diff}
+  }
+}
+
+# query {
+#   player(id: 699758283) {
+#     name,
+#     tribe,
+#     points,
+#     villages {
+#       id,
+#       name,
+#       x,
+#       y,
+#       points,
+#       units,
+#       conquer{
+#         date,
+#         new_player {
+#           id,
+#           name
+#         },
+#         old_player {
+#           id, 
+#           name
+#         }
+#       }
+#     },
+#     support {
+#       id,
+#       name,
+#       x,
+#       y,
+#       units
+#     },
+#     stats {
+#       graph_res_looted_breakdown
+#     }
+#   }
+# }
+
+
+# query {
+#   players {
+#     id,
+#     name,
+#     tribe,
+#     villages {
+#       id, 
+#       name
+#       name,
+#       x,
+#       y,
+#       points,
+#       player_id,
+#       # conquer {
+#       # 	new_player {
+#       # 		name,
+#       # 		tribe
+#       #   },
+#       #   old_player {
+#       #     id,
+#       #     name,
+#       #   	tribe
+#       #   }
+#       # },
+#       units
+#     },
+#   	support {
+#   	id, 
+#   	name,
+#   	x,
+#   	y,
+#   	points,
+#   	player_id,
+#   	units
+#   	},
+#   	premium,
+#   	stats {
+#   		graph_res_looted_breakdown
+#   	}
+#   }
+# }

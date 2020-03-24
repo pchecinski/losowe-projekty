@@ -1,0 +1,8 @@
+{
+    "env": {
+        "MONGO_USER": "plemiona",
+        "MONGO_DB": "plemiona",
+        "MONGO_PASS": "0tj0VDKVYGZPgHCk"
+        
+    }
+}

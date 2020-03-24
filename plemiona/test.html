@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test1">?</div>
+    <div id="test2">?</div>
+    <div id="test3">?</div>
+
+    <script>
+        const test = id => {
+            const div = document.querySelector(`#${id}`);
+            
+            div.innerText = 'ok';
+        }
+
+        const test1 = async () => {
+            test('test1');
+        }
+
+        const test2 = () => {
+            test('test2');
+        }
+
+        const test3 = () => {
+            test('test3');
+        }
+
+        setTimeout(test1, 1000);
+        setTimeout(test2, 500);
+        setTimeout(test3, 1500);
+        
+    </script>
+</body>
+</html>

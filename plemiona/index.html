@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="https://dspl.innogamescdn.com/assets/pl140/f6712b143cab35ea3266a77974878b96/merged/game.css" />
+    <link rel="stylesheet" type="text/css" href="https://dspl.innogamescdn.com/assets/pl140/960ade46099b10f57c25bffc07586715/css/game/graph.css" />
+
+    <script src="https://dspl.innogamescdn.com/assets/pl140/6ac0704c08016d0416f8a583d0fb0f9c/js/lang.pl_PL.js"></script>
+    <script type="text/javascript" src="https://dspl.innogamescdn.com/assets/pl140/7491df6ab087c9b98bf8fc8b728249b7/merged/game.js"></script>
+    <script type="text/javascript" src="https://dspl.innogamescdn.com/assets/pl140/7c5d2516b29e0e7197c507549d8079a7/merged/game.pl_PL.js"></script>
+    <script type="text/javascript" src="https://dspl.innogamescdn.com/assets/pl140/2a3fbf2d05312d4e5478ec9fdd1b95df/js/game/InfoPlayer.js"></script>
+    <script type="text/javascript" src="https://dspl.innogamescdn.com/assets/pl140/af877a7946403c96546bf83e9b9916d1/js/jquery/jquery.flot-1.8.min.js"></script>
+    <script type="text/javascript" src="https://dspl.innogamescdn.com/assets/pl140/20b789a8c2053e44309d5b83f9d2ff1d/js/jquery/jquery.flot.time.min.js"></script>
+    <script type="text/javascript" src="https://dspl.innogamescdn.com/assets/pl140/911f4460914b2d015bdef90aa417585c/js/jquery/jquery.flot.stack.min.js"></script>
+    <script type="text/javascript" src="https://dspl.innogamescdn.com/assets/pl140/0fb3626e0b7ab3ef6a435a15c2574ac1/js/game/Graph.js_"></script>
+
+    <script>
+        var mobile = false;
+    </script>
+
+    <title>Document</title>
+</head>
+<body>
+    <!-- looted resources (detailed resource breakdown) -->
+    <div class="vis graph_widget ">
+        <h4 class="head"><img  src="https://dspl.innogamescdn.com/asset/b6488450/graphic/welcome/res.png" alt="" />Zrabowane surowce</h4>
+        <div class="graph">
+            <div id="graph_res_looted_breakdown" class="graph_canvas" style="height:226px;"></div>
+            <div class="center">
+                <div id="graph_res_looted_breakdown_legend" style="display:inline-block;">
+                    <table style="font-size:smaller;color:#545454">
+                        <tr>
+                            <td>
+                                <div class="graph_legend_colorbox" style="background-color:cyan"></div>Zrabowane                    
+                            </td>
+                            <td>
+                                <div class="graph_legend_colorbox" style="background-color:green"></div>Zebrane  
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- enemy units killed -->
+    <div class="vis graph_widget ">
+        <h4 class="head"><img src="https://dspl.innogamescdn.com/asset/b6488450/graphic/welcome/kill.png" alt="" />Pokonane jednostki</h4>
+        <div class="graph">
+            <div id="graph_enemy_units" class="graph_canvas"></div>
+        </div>
+    </div>
+    
+
+    <!-- troop gains / losses -->
+    <div class="vis graph_widget ">
+        <h4 class="head"><img src="https://dspl.innogamescdn.com/asset/b6488450/graphic/welcome/kill.png" alt="" />Jednostki zyskane/stracone</h4>
+        <div class="graph">
+            <div id="graph_units_diff" class="graph_canvas"></div>
+        </div>
+    </div>
+
+    <!-- resource spending stacked bar -->
+    <div class="vis graph_widget ">
+        <h4 class="head"><img  src="https://dspl.innogamescdn.com/asset/b6488450/graphic/welcome/res.png" alt="" /> Wydane surowce</h4>
+        <div class="graph">
+            <div id="graph_resource_spending" class="graph_canvas" style="height:226px;"></div>
+            <div class="center">
+                <div id="graph_resource_spending_legend" style="display:inline-block;">
+                    <table style="font-size:smaller;color:#545454">
+                            <tr>
+                                <td>
+                                    <div class="graph_legend_colorbox" style="background-color:#00C4CF"></div>Jednostki                                        
+                                </td>
+                                <td>
+                                    <div class="graph_legend_colorbox" style="background-color:#8A5319"></div>Budynki  
+                                </td>
+                                <td>
+                                    <div class="graph_legend_colorbox" style="background-color:#E8DA1C"></div>Szlachta 
+                                </td>
+                                <td>
+                                    <div class="graph_legend_colorbox" style="background-color:#0022BA"></div>Rycerz 
+                                </td>
+                                <td>
+                                    <div class="graph_legend_colorbox" style="background-color:#7B04C4"></div>Technologia  
+                                </td>
+                                <td>
+                                    <div class="graph_legend_colorbox" style="background-color:#f49542"></div>Zbieractwo  
+                                </td>
+                                <td>
+                                    <div class="graph_legend_colorbox" style="background-color:green"></div>Handel 
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        var data = JSON.parse('[{"label":"Zrabowane","details":[{"time":"1558735200000","wood":"43559","stone":"43136","iron":"35450","total":"122145","percent":94.72643375},{"time":"1558648800000","wood":"41661","stone":"40012","iron":"39614","total":"121287","percent":56.84750768},{"time":"1558562400000","wood":"76990","stone":"69944","iron":"64240","total":"211174","percent":77.55082555},{"time":"1558476000000","wood":"71485","stone":"76565","iron":"58100","total":"206150","percent":70.52613213},{"time":"1558389600000","wood":"55275","stone":"58672","iron":"45082","total":"159029","percent":52.04101},{"time":"1558303200000","wood":"55429","stone":"59297","iron":"44775","total":"159501","percent":58.71281698},{"time":"1558216800000","wood":"21602","stone":"20006","iron":"22748","total":"64356","percent":49.62792168}],"color":"cyan","data":[["1558735200000","122145"],["1558648800000","121287"],["1558562400000","211174"],["1558476000000","206150"],["1558389600000","159029"],["1558303200000","159501"],["1558216800000","64356"]]},{"label":"Zebrane","details":[{"time":"1558735200000","wood":"2267","stone":"2267","iron":"2266","total":"6800","percent":5.273566249},{"time":"1558648800000","wood":"30690","stone":"30690","iron":"30688","total":"92068","percent":43.15249232},{"time":"1558562400000","wood":"20376","stone":"20376","iron":"20378","total":"61130","percent":22.44917445},{"time":"1558476000000","wood":"28717","stone":"28717","iron":"28719","total":"86153","percent":29.47386787},{"time":"1558389600000","wood":"48850","stone":"48850","iron":"48855","total":"146555","percent":47.95899},{"time":"1558303200000","wood":"37389","stone":"37389","iron":"37384","total":"112162","percent":41.28718302},{"time":"1558216800000","wood":"21774","stone":"21774","iron":"21773","total":"65321","percent":50.37207832}],"color":"green","data":[["1558735200000","6800"],["1558648800000","92068"],["1558562400000","61130"],["1558476000000","86153"],["1558389600000","146555"],["1558303200000","112162"],["1558216800000","65321"]]}]')
+        var graph = new Graph($('#graph_res_looted_breakdown'), 'bar_stacked', data);
+        graph.settings.legend = {
+            show: false
+        };
+        InfoPlayer.Stats.addGraph(graph);
+
+        var data = JSON.parse('[{"color":"green","data":[["1558735200000","3560"],["1558648800000","33"],["1558562400000","555"],["1558476000000","1897"],["1558389600000","0"],["1558303200000","0"],["1558216800000","493"],["1558130400000","1835"],["1558044000000","1739"],["1557957600000","141"],["1557871200000","888"],["1557784800000","417"],["1557698400000","1011"],["1557612000000","0"]]}]');
+        var graph = new Graph($('#graph_enemy_units'), 'bar', data);
+        InfoPlayer.Stats.addGraph(graph);
+
+        var data = JSON.parse('[{"color":"green","data":[["1558735200000","0"],["1558648800000","2616"],["1558562400000","1073"],["1558476000000","2442"],["1558389600000","1798"],["1558216800000","1516"],["1558130400000","981"],["1557957600000","423"],["1557871200000","325"],["1557784800000","522"],["1557698400000","1024"],["1557612000000","835"]]},{"color":"red","data":[["1558303200000","-3536"],["1558044000000","-456"]]}]');
+        var graph = new Graph($('#graph_units_diff'), 'bar', data);
+        graph.settings.legend = {position:'nw'};
+        graph.settings.yaxis.min = null;
+        InfoPlayer.Stats.addGraph(graph);
+
+        var data = JSON.parse('[{"label":"Jednostki","details":[{"time":"1558735200000","wood":"163405","stone":"105250","iron":"194840","total":"463495","percent":32.57667021},{"time":"1558648800000","wood":"161528","stone":"110308","iron":"206284","total":"478120","percent":33.53223196},{"time":"1558562400000","wood":"159713","stone":"111911","iron":"166802","total":"438426","percent":26.93853475},{"time":"1558476000000","wood":"152505","stone":"88976","iron":"169247","total":"410728","percent":43.28647008},{"time":"1558389600000","wood":"130637","stone":"75691","iron":"129630","total":"335958","percent":37.51846843},{"time":"1558303200000","wood":"114081","stone":"72489","iron":"129175","total":"315745","percent":35.83109019},{"time":"1558216800000","wood":"137388","stone":"88703","iron":"171769","total":"397860","percent":71.00788144}],"color":"#00C4CF","data":[["1558735200000","463495"],["1558648800000","478120"],["1558562400000","438426"],["1558476000000","410728"],["1558389600000","335958"],["1558303200000","315745"],["1558216800000","397860"]]},{"label":"Budynki","details":[{"time":"1558735200000","wood":"117190","stone":"151727","iron":"62290","total":"331207","percent":23.27882979},{"time":"1558648800000","wood":"208031","stone":"202313","iron":"107388","total":"517732","percent":36.3103604},{"time":"1558562400000","wood":"199715","stone":"227578","iron":"103006","total":"530299","percent":32.58355581},{"time":"1558476000000","wood":"100034","stone":"98282","iron":"50076","total":"248392","percent":26.17793984},{"time":"1558389600000","wood":"65523","stone":"124279","iron":"42147","total":"231949","percent":25.90315228},{"time":"1558303200000","wood":"121828","stone":"117361","iron":"56330","total":"295519","percent":33.53582144},{"time":"1558216800000","wood":"28519","stone":"47790","iron":"18335","total":"94644","percent":16.89154459}],"color":"#8A5319","data":[["1558735200000","331207"],["1558648800000","517732"],["1558562400000","530299"],["1558476000000","248392"],["1558389600000","231949"],["1558303200000","295519"],["1558216800000","94644"]]},{"label":"Szlachta","details":[{"time":"1558735200000","wood":"160000","stone":"200000","iron":"200000","total":"560000","percent":39.35950834},{"time":"1558648800000","wood":"120000","stone":"150000","iron":"150000","total":"420000","percent":29.45607258},{"time":"1558562400000","wood":"186480","stone":"199800","iron":"166500","total":"552780","percent":33.96487261},{"time":"1558476000000","wood":"72240","stone":"77400","iron":"64500","total":"214140","percent":22.56813439},{"time":"1558389600000","wood":"72240","stone":"77400","iron":"64500","total":"214140","percent":23.91431319},{"time":"1558303200000","wood":"72240","stone":"77400","iron":"64500","total":"214140","percent":24.30084294},{"time":"1558216800000","wood":"0","stone":"0","iron":"0","total":"0","percent":0}],"color":"#E8DA1C","data":[["1558735200000","560000"],["1558648800000","420000"],["1558562400000","552780"],["1558476000000","214140"],["1558389600000","214140"],["1558303200000","214140"],["1558216800000","0"]]},{"label":"Rycerz","details":[{"time":"1558735200000","wood":"20","stone":"20","iron":"40","total":"80","percent":0.005622786906},{"time":"1558648800000","wood":"0","stone":"0","iron":"0","total":"0","percent":0},{"time":"1558562400000","wood":"20000","stone":"20000","iron":"20000","total":"60000","percent":3.686624619},{"time":"1558476000000","wood":"15200","stone":"15200","iron":"15200","total":"45600","percent":4.80576692},{"time":"1558389600000","wood":"9200","stone":"9200","iron":"9200","total":"27600","percent":3.082259475},{"time":"1558303200000","wood":"8600","stone":"8600","iron":"8600","total":"25800","percent":2.927812402},{"time":"1558216800000","wood":"0","stone":"0","iron":"0","total":"0","percent":0}],"color":"#0022BA","data":[["1558735200000","80"],["1558648800000","0"],["1558562400000","60000"],["1558476000000","45600"],["1558389600000","27600"],["1558303200000","25800"],["1558216800000","0"]]},{"label":"Technologia","details":[{"time":"1558735200000","wood":"0","stone":"0","iron":"0","total":"0","percent":0},{"time":"1558648800000","wood":"0","stone":"0","iron":"0","total":"0","percent":0},{"time":"1558562400000","wood":"0","stone":"0","iron":"0","total":"0","percent":0},{"time":"1558476000000","wood":"0","stone":"0","iron":"0","total":"0","percent":0},{"time":"1558389600000","wood":"0","stone":"0","iron":"0","total":"0","percent":0},{"time":"1558303200000","wood":"0","stone":"0","iron":"0","total":"0","percent":0},{"time":"1558216800000","wood":"1600","stone":"2000","iron":"1200","total":"4800","percent":0.8566778035}],"color":"#7B04C4","data":[["1558735200000","0"],["1558648800000","0"],["1558562400000","0"],["1558476000000","0"],["1558389600000","0"],["1558303200000","0"],["1558216800000","4800"]]},{"label":"Zbieractwo","details":[{"time":"1558735200000","wood":"0","stone":"0","iron":"0","total":"0","percent":0},{"time":"1558648800000","wood":"0","stone":"0","iron":"0","total":"0","percent":0},{"time":"1558562400000","wood":"10000","stone":"12000","iron":"10000","total":"32000","percent":1.966199797},{"time":"1558476000000","wood":"0","stone":"0","iron":"0","total":"0","percent":0},{"time":"1558389600000","wood":"10000","stone":"12000","iron":"10000","total":"32000","percent":3.573634174},{"time":"1558303200000","wood":"0","stone":"0","iron":"0","total":"0","percent":0},{"time":"1558216800000","wood":"0","stone":"0","iron":"0","total":"0","percent":0}],"color":"#f49542","data":[["1558735200000","0"],["1558648800000","0"],["1558562400000","32000"],["1558476000000","0"],["1558389600000","32000"],["1558303200000","0"],["1558216800000","0"]]},{"label":"Handel","details":[{"time":"1558735200000","wood":"0","stone":"68000","iron":"0","total":"68000","percent":4.77936887},{"time":"1558648800000","wood":"0","stone":"10000","iron":"0","total":"10000","percent":0.7013350614},{"time":"1558562400000","wood":"2000","stone":"12000","iron":"0","total":"14000","percent":0.860212411},{"time":"1558476000000","wood":"1000","stone":"29000","iron":"0","total":"30000","percent":3.161688763},{"time":"1558389600000","wood":"11000","stone":"20000","iron":"22800","total":"53800","percent":6.008172455},{"time":"1558303200000","wood":"0","stone":"30000","iron":"0","total":"30000","percent":3.404433026},{"time":"1558216800000","wood":"3000","stone":"60000","iron":"0","total":"63000","percent":11.24389617}],"color":"green","data":[["1558735200000","68000"],["1558648800000","10000"],["1558562400000","14000"],["1558476000000","30000"],["1558389600000","53800"],["1558303200000","30000"],["1558216800000","63000"]]}]');
+        var graph = new Graph($('#graph_resource_spending'), 'bar_stacked', data);
+        graph.settings.legend = {
+            show: false
+        };
+        InfoPlayer.Stats.addGraph(graph);
+
+
+        InfoPlayer.Stats.init();
+  </script>
+
+</body>
+</html>
